@@ -3,8 +3,19 @@
  */
 
 import {AppRegistry} from 'react-native';
+import React from 'react';
 import 'react-native-gesture-handler';
-import App from './App';
+import {Provider} from 'react-redux';
+import App from './src/App';
 import {name as appName} from './app.json';
+import configureStore from './src/config/store';
 
-AppRegistry.registerComponent(appName, () => App);
+const store = configureStore();
+
+const APP = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+AppRegistry.registerComponent(appName, () => APP);
