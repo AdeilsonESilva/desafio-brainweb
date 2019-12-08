@@ -6,15 +6,13 @@ import {AppRegistry} from 'react-native';
 import React from 'react';
 import 'react-native-gesture-handler';
 import {Provider} from 'react-redux';
-import App from './src/App';
+import Routes from './src';
 import {name as appName} from './app.json';
-import configureStore from './src/config/store';
-
-const store = configureStore();
+import store from './src/store';
 
 const APP = () => (
   <Provider store={store}>
-    <App />
+    <Routes />
   </Provider>
 );
 

@@ -1,18 +1,11 @@
-import {ADD_COUNTER} from '../action/types';
+import {ADD_COUNTER} from '../actions/types';
 
-const initialState = {
-  counterName: '',
-  value: 0,
-};
+const INITIAL_STATE = [];
 
-const counterReducer = (state = initialState, action) => {
+const counterReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_COUNTER:
-      return {
-        ...state,
-
-        value: action.payload,
-      };
+      return [...state, action.counter];
     default:
       return state;
   }
