@@ -18,14 +18,6 @@ const CountersScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const counters = useSelector(state => state.counters);
 
-  // const increaseCounter = (item, index) => {
-  //   dispatch({
-  //     type: INCREASE_COUNTER,
-  //     item,
-  //     index,
-  //   });
-  // };
-
   const selectCounter = index => {
     dispatch({
       type: SELECT_COUNTER,

@@ -1,5 +1,3 @@
-// src/index.js
-
 import CountersScreen from './screens/CountersScreen';
 import ConfigsScreen from './screens/ConfigsScreen';
 

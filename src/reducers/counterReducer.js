@@ -1,28 +1,37 @@
-import {ADD_COUNTER, INCREASE_COUNTER, SELECT_COUNTER} from '../actions/types';
+import {
+  ADD_COUNTER,
+  INCREASE_COUNTER,
+  DECREASE_COUNTER,
+  SELECT_COUNTER,
+  REMOVE_COUNTER,
+  RESET_COUNTER,
+} from '../actions/types';
 
-const INITIAL_STATE = [
-  {
-    number: 8,
-    selected: true,
-  },
-  {
-    number: 12,
-  },
-  {
-    number: 1,
-  },
-  {
-    number: 2,
-  },
-  {
-    number: 3,
-  },
-];
+const INITIAL_STATE = [];
+
+const selectItem = paramState => {
+  if (!paramState || paramState.length === 0) {
+    return false;
+  }
+
+  if (paramState.filter(item => item.selected).length === 0) {
+    paramState[0].selected = true;
+  }
+};
 
 const counterReducer = (state = INITIAL_STATE, action) => {
+  let newState;
+
   switch (action.type) {
     case ADD_COUNTER:
-      return [...state, action.counter];
+      newState = [...state];
+      newState.push({number: 0});
+      selectItem(newState);
+      return newState;
+    case REMOVE_COUNTER:
+      newState = state.filter(item => !item.selected);
+      selectItem(newState);
+      return newState;
     case SELECT_COUNTER:
       const counterSelect = state.map((item, index) => {
         if (action.index - 1 === index) {
@@ -35,15 +44,35 @@ const counterReducer = (state = INITIAL_STATE, action) => {
       });
       return counterSelect;
     case INCREASE_COUNTER:
-      const counterIncrease = state.map((item, index) => {
-        if (action.index - 1 === index) {
+      newState = state.map(item => {
+        if (item.selected) {
           item.number++;
           return item;
         }
 
         return item;
       });
-      return counterIncrease;
+      return newState;
+    case DECREASE_COUNTER:
+      newState = state.map(item => {
+        if (item.selected && item.number > 0) {
+          item.number--;
+          return item;
+        }
+
+        return item;
+      });
+      return newState;
+    case RESET_COUNTER:
+      newState = state.map(item => {
+        if (item.selected) {
+          item.number = 0;
+          return item;
+        }
+
+        return item;
+      });
+      return newState;
     default:
       return state;
   }
