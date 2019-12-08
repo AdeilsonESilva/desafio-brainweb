@@ -100,6 +100,11 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: '#26497E',
     padding: 5,
+    shadowColor: 'rgba(0,0,0,.7)',
+    shadowOffset: {width: 0, height: 5},
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
+    elevation: 1,
   },
   itemSelected: {
     backgroundColor: '#DBDBDB',
