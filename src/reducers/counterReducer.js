@@ -25,8 +25,10 @@ const counterReducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case REHYDRATE:
-      console.log('action.payload', action.payload);
-      return action.payload.counters;
+      if (action.payload && action.payload.counters) {
+        return action.payload.counters;
+      }
+      return state;
     case ADD_COUNTER:
       newState = [...state];
       newState.push({number: 0});
