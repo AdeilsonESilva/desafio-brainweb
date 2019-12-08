@@ -14,7 +14,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/header';
 
-const Screen1 = ({navigation}) => {
+const CountersScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const counters = useSelector(state => state.counters);
 
@@ -77,7 +77,7 @@ const Screen1 = ({navigation}) => {
   );
 };
 
-Screen1.navigationOptions = {
+CountersScreen.navigationOptions = {
   title: 'Counters',
   tabBarIcon: ({tintColor}) => (
     <FontAwesomeIcon icon={faStar} size={25} color={tintColor} />
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen1;
+export default CountersScreen;

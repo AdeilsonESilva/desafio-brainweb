@@ -14,7 +14,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/header';
 
-const Screen2 = ({navigation}) => {
+const ConfigsScreen = ({navigation}) => {
   // const [textValue, setTextValue] = useState('');
   const dispatch = useDispatch();
   const counters = useSelector(state => state.counters);
@@ -105,7 +105,7 @@ const Screen2 = ({navigation}) => {
   );
 };
 
-Screen2.navigationOptions = {
+ConfigsScreen.navigationOptions = {
   title: 'Config',
   tabBarIcon: ({tintColor}) => (
     <FontAwesomeIcon icon={faStar} size={25} color={tintColor} />
@@ -164,4 +164,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen2;
+export default ConfigsScreen;

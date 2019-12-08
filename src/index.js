@@ -1,7 +1,7 @@
 // src/index.js
 
-import Screen1 from './screens/Screen1';
-import Screen2 from './screens/Screen2';
+import CountersScreen from './screens/CountersScreen';
+import ConfigsScreen from './screens/ConfigsScreen';
 
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -9,8 +9,8 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 const Routes = createAppContainer(
   createBottomTabNavigator(
     {
-      Home: Screen1,
-      About: Screen2,
+      Home: CountersScreen,
+      About: ConfigsScreen,
     },
     {
       tabBarOptions: {
