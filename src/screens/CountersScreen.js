@@ -7,7 +7,7 @@ import {
   Text,
   FlatList,
 } from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
 import {SELECT_COUNTER} from '../actions/types';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -54,7 +54,7 @@ const CountersScreen = ({navigation}) => {
   };
 
   const renderListEmpty = () => (
-    <View style={styles.containerEmpty}>
+    <View style={[styles.containerList, styles.containerEmpty]}>
       <Text style={styles.emptyText}>Counters not found!</Text>
     </View>
   );
@@ -64,15 +64,16 @@ const CountersScreen = ({navigation}) => {
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.container}>
         <Header title="Counters" />
-        <View style={styles.containerList}>
+        {counters.length === 0 ? (
+          renderListEmpty()
+        ) : (
           <FlatList
             data={counters}
             renderItem={({item, index}) => renderItem(item, index)}
             keyExtractor={(item, index) => index.toString()}
-            ListEmptyComponent={renderListEmpty}
-            contentContainerStyle={styles.containerListStyle}
+            style={styles.containerList}
           />
-        </View>
+        )}
       </SafeAreaView>
     </>
   );
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerList: {
-    flex: 7,
+    // flex: 1,
     backgroundColor: '#0082c9',
   },
   item: {

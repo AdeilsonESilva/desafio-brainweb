@@ -1,5 +1,7 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Dimensions} from 'react-native';
+
+const {height} = Dimensions.get('window');
 
 const Header = props => (
   <View style={styles.container}>
@@ -10,9 +12,9 @@ const Header = props => (
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#001c47',
-    flex: 1,
     margin: 10,
     justifyContent: 'flex-end',
+    height: height * 0.1,
   },
   headerText: {
     color: '#fff',
