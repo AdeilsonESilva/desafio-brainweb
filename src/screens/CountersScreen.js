@@ -7,7 +7,7 @@ import {
   Text,
   FlatList,
 } from 'react-native';
-import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
 import {SELECT_COUNTER} from '../actions/types';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
