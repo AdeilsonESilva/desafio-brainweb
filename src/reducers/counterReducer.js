@@ -6,6 +6,7 @@ import {
   REMOVE_COUNTER,
   RESET_COUNTER,
 } from '../actions/types';
+import {REHYDRATE} from 'redux-persist';
 
 const INITIAL_STATE = [];
 
@@ -23,6 +24,9 @@ const counterReducer = (state = INITIAL_STATE, action) => {
   let newState;
 
   switch (action.type) {
+    case REHYDRATE:
+      console.log('action.payload', action.payload);
+      return action.payload.counters;
     case ADD_COUNTER:
       newState = [...state];
       newState.push({number: 0});
