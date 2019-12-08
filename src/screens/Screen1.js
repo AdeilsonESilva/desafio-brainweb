@@ -13,6 +13,8 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useSelector, useDispatch} from 'react-redux';
 import {ADD_COUNTER} from '../actions/types';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faStar} from '@fortawesome/free-solid-svg-icons';
 
 const Screen1 = ({navigation}) => {
   const [textValue, setTextValue] = useState('');
@@ -66,7 +68,10 @@ const Screen1 = ({navigation}) => {
 };
 
 Screen1.navigationOptions = {
-  title: 'Home',
+  title: 'Counters',
+  tabBarIcon: ({tintColor}) => (
+    <FontAwesomeIcon icon={faStar} size={25} color={tintColor} />
+  ),
 };
 
 const styles = StyleSheet.create({

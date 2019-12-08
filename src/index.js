@@ -7,10 +7,17 @@ import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 const Routes = createAppContainer(
-  createBottomTabNavigator({
-    Home: Screen1,
-    About: Screen2,
-  }),
+  createBottomTabNavigator(
+    {
+      Home: Screen1,
+      About: Screen2,
+    },
+    {
+      tabBarOptions: {
+        activeTintColor: '#F39502',
+      },
+    },
+  ),
 );
 
 export default Routes;
