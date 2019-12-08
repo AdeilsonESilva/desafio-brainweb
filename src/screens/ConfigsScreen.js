@@ -115,7 +115,7 @@ ConfigsScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#203158',
+    backgroundColor: '#001c47',
     flex: 1,
   },
   containerList: {

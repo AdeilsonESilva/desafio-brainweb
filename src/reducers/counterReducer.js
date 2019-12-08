@@ -1,4 +1,4 @@
-import {ADD_COUNTER, INCREASE_COUNTER} from '../actions/types';
+import {ADD_COUNTER, INCREASE_COUNTER, SELECT_COUNTER} from '../actions/types';
 
 const INITIAL_STATE = [
   {
@@ -23,9 +23,9 @@ const counterReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_COUNTER:
       return [...state, action.counter];
-    case INCREASE_COUNTER:
-      const newState = state.map((item, index) => {
-        if (action.index === index) {
+    case SELECT_COUNTER:
+      const counterSelect = state.map((item, index) => {
+        if (action.index - 1 === index) {
           item.selected = true;
           return item;
         }
@@ -33,7 +33,17 @@ const counterReducer = (state = INITIAL_STATE, action) => {
         item.selected = false;
         return item;
       });
-      return newState;
+      return counterSelect;
+    case INCREASE_COUNTER:
+      const counterIncrease = state.map((item, index) => {
+        if (action.index - 1 === index) {
+          item.number++;
+          return item;
+        }
+
+        return item;
+      });
+      return counterIncrease;
     default:
       return state;
   }

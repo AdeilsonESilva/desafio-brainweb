@@ -1,2 +1,3 @@
 export const ADD_COUNTER = 'ADD_COUNTER';
 export const INCREASE_COUNTER = 'INCREASE_COUNTER';
+export const SELECT_COUNTER = 'SELECT_COUNTER';

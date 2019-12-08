@@ -9,7 +9,7 @@ const Header = props => (
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#203158',
+    backgroundColor: '#001c47',
     flex: 1,
     margin: 10,
     justifyContent: 'flex-end',

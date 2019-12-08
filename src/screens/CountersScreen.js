@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
-import {INCREASE_COUNTER} from '../actions/types';
+import {SELECT_COUNTER} from '../actions/types';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/header';
@@ -18,18 +18,19 @@ const CountersScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const counters = useSelector(state => state.counters);
 
-  const increaseCounterAction = (item, index) => {
-    return {
-      type: INCREASE_COUNTER,
-      item,
-      index,
-    };
-  };
+  // const increaseCounter = (item, index) => {
+  //   dispatch({
+  //     type: INCREASE_COUNTER,
+  //     item,
+  //     index,
+  //   });
+  // };
 
-  const increaseCounter = (item, index) => {
-    const newItem = item;
-    newItem.number += 1;
-    dispatch(increaseCounterAction(newItem, --index));
+  const selectCounter = index => {
+    dispatch({
+      type: SELECT_COUNTER,
+      index,
+    });
   };
 
   const renderItem = (item, index) => {
@@ -39,7 +40,7 @@ const CountersScreen = ({navigation}) => {
           styles.item,
           item.selected ? styles.itemSelected : styles.itemNotSelected,
         ]}
-        onPress={() => increaseCounter(item, index)}>
+        onPress={() => selectCounter(index)}>
         <Text
           style={[
             styles.itemTitle,
@@ -60,6 +61,12 @@ const CountersScreen = ({navigation}) => {
     );
   };
 
+  const renderListEmpty = () => (
+    <View style={styles.containerEmpty}>
+      <Text style={styles.emptyText}>Counters not found!</Text>
+    </View>
+  );
+
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -70,6 +77,8 @@ const CountersScreen = ({navigation}) => {
             data={counters}
             renderItem={({item, index}) => renderItem(item, index)}
             keyExtractor={(item, index) => index.toString()}
+            ListEmptyComponent={renderListEmpty}
+            contentContainerStyle={styles.containerListStyle}
           />
         </View>
       </SafeAreaView>
@@ -87,12 +96,12 @@ CountersScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#203158',
+    backgroundColor: '#001c47',
     flex: 1,
   },
   containerList: {
     flex: 7,
-    backgroundColor: '#3E86CB',
+    backgroundColor: '#0082c9',
   },
   item: {
     margin: 15,
@@ -138,6 +147,19 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+  },
+  containerEmpty: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 25,
+  },
+  containerListStyle: {
+    flex: 1,
   },
 });
 
