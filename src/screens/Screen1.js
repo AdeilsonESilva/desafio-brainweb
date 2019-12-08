@@ -1,67 +1,77 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   StatusBar,
-  TextInput,
   View,
-  Button,
   Text,
+  FlatList,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useSelector, useDispatch} from 'react-redux';
-import {ADD_COUNTER} from '../actions/types';
+import {INCREASE_COUNTER} from '../actions/types';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
+import Header from '../components/header';
 
 const Screen1 = ({navigation}) => {
-  const [textValue, setTextValue] = useState('');
-  // const counters = useSelector(state => state.data.slice(0, qty));
   const dispatch = useDispatch();
+  const counters = useSelector(state => state.counters);
 
-  const addCounter = () => {
-    dispatch(addCounterAction({textValue}));
-    setTextValue('');
+  const increaseCounterAction = (item, index) => {
+    return {
+      type: INCREASE_COUNTER,
+      item,
+      index,
+    };
   };
 
-  const onChangeText = text => setTextValue(text);
+  const increaseCounter = (item, index) => {
+    const newItem = item;
+    newItem.number += 1;
+    dispatch(increaseCounterAction(newItem, --index));
+  };
 
-  const addCounterAction = counter => {
-    return {type: ADD_COUNTER, counter};
+  const renderItem = (item, index) => {
+    return (
+      <TouchableOpacity
+        style={[
+          styles.item,
+          item.selected ? styles.itemSelected : styles.itemNotSelected,
+        ]}
+        onPress={() => increaseCounter(item, index)}>
+        <Text
+          style={[
+            styles.itemTitle,
+            item.selected
+              ? styles.itemTitleSelected
+              : styles.itemTitleNotSelected,
+          ]}>{`Counter ${++index}`}</Text>
+        <Text
+          style={[
+            styles.itemBody,
+            item.selected
+              ? styles.itemBodySelected
+              : styles.itemBodyNotSelected,
+          ]}>
+          {item.number.toString().padStart(4, '0')}
+        </Text>
+      </TouchableOpacity>
+    );
   };
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Home ;D</Text>
-            <Button
-              title="Ir para About"
-              onPress={() => {
-                setTextValue('ade');
-                addCounter();
-                return navigation.navigate('About');
-              }}
-            />
-          </View>
-          <View>
-            <TextInput
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={text => onChangeText(text)}
-              value={textValue}
-            />
-            <TouchableOpacity onPress={addCounter}>
-              <Text>Ade</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+      <StatusBar barStyle="light-content" />
+      <SafeAreaView style={styles.container}>
+        <Header title="Counters" />
+        <View style={styles.containerList}>
+          <FlatList
+            data={counters}
+            renderItem={({item, index}) => renderItem(item, index)}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
       </SafeAreaView>
     </>
   );
@@ -72,44 +82,57 @@ Screen1.navigationOptions = {
   tabBarIcon: ({tintColor}) => (
     <FontAwesomeIcon icon={faStar} size={25} color={tintColor} />
   ),
+  tabBarVisible: true,
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+    backgroundColor: '#203158',
+    flex: 1,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  containerList: {
+    flex: 7,
+    backgroundColor: '#3E86CB',
   },
-  body: {
-    backgroundColor: Colors.white,
+  item: {
+    margin: 15,
+    borderRadius: 6,
+    borderWidth: 4,
+    borderColor: '#26497E',
+    padding: 5,
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  itemSelected: {
+    backgroundColor: '#DBDBDB',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
+  itemNotSelected: {
+    backgroundColor: '#6DADD1',
   },
-  sectionDescription: {
-    marginTop: 8,
+  itemTitleSelected: {
+    color: '#9E9E9E',
+  },
+  itemTitleNotSelected: {
+    color: '#4E8EB2',
+  },
+  itemBodySelected: {
+    color: '#000',
+  },
+  itemBodyNotSelected: {
+    color: '#4E8EB2',
+  },
+  itemTitle: {
     fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
+    fontWeight: 'bold',
   },
-  highlight: {
-    fontWeight: '700',
+  itemBody: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    alignSelf: 'flex-end',
+    marginTop: 30,
+    marginBottom: 10,
+    marginRight: 5,
   },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  title: {
+    fontSize: 20,
   },
 });
 
