@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, View, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   INCREASE_COUNTER,
