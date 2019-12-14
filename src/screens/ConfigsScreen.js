@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, StatusBar, View, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   INCREASE_COUNTER,
   ADD_COUNTER,
@@ -16,6 +16,7 @@ import Panel from '../components/panel';
 
 const ConfigsScreen = ({navigation}) => {
   const dispatch = useDispatch();
+  const hasCounters = useSelector(state => state.counters.length > 0);
 
   const addCounter = () => {
     dispatch({
@@ -58,11 +59,13 @@ const ConfigsScreen = ({navigation}) => {
               onPress={addCounter}
               text={'Add\nCounter'}
               toast="Adding new counter"
+              disabled={false}
             />
             <ButtonDefault
               onPress={removeCounter}
               text={'Remove\nCounter'}
               toast="Removed selected counter"
+              disabled={!hasCounters}
             />
           </Panel>
           <View style={styles.countersOperations}>
@@ -71,11 +74,13 @@ const ConfigsScreen = ({navigation}) => {
                 onPress={increaseCounter}
                 text={'Increase\nCounter (++)'}
                 toast="Increased counter"
+                disabled={!hasCounters}
               />
               <ButtonDefault
                 onPress={decreaseCounter}
                 text={'Decrease\nCounter (--)'}
                 toast="Decreased counter"
+                disabled={!hasCounters}
               />
             </Panel>
             <View style={styles.countersOperations}>
@@ -83,7 +88,8 @@ const ConfigsScreen = ({navigation}) => {
                 onPress={resetCounter}
                 text={'Reset\nCounter'}
                 styleButton={styles.buttonReset}
-                toast="Reset"
+                toast="Reseted counter"
+                disabled={!hasCounters}
               />
             </View>
           </View>

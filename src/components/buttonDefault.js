@@ -9,11 +9,14 @@ const ButtonDefault = props => {
     Toast(props.toast);
   };
 
+  const styleDisable = props.disabled && {...styles.buttonDisabled};
+
   return (
     <>
       <TouchableOpacity
-        style={[styles.button, props.styleButton]}
-        onPress={press}>
+        style={[styles.button, props.styleButton, styleDisable]}
+        onPress={press}
+        disabled={props.disabled}>
         <Text style={styles.textButton} numberOfLines={2} ellipsizeMode="tail">
           {props.text}
         </Text>
@@ -39,6 +42,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     minWidth: 90,
+  },
+  buttonDisabled: {
+    backgroundColor: '#bbb',
   },
 });
 
