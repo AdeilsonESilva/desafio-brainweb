@@ -1,16 +1,24 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import Toast from './toast';
 
 const ButtonDefault = props => {
+  const press = () => {
+    props.onPress();
+    Toast(props.toast);
+  };
+
   return (
-    <TouchableOpacity
-      style={[styles.button, props.styleButton]}
-      onPress={props.onPress}>
-      <Text style={styles.textButton} numberOfLines={2} ellipsizeMode="tail">
-        {props.text}
-      </Text>
-    </TouchableOpacity>
+    <>
+      <TouchableOpacity
+        style={[styles.button, props.styleButton]}
+        onPress={press}>
+        <Text style={styles.textButton} numberOfLines={2} ellipsizeMode="tail">
+          {props.text}
+        </Text>
+      </TouchableOpacity>
+    </>
   );
 };
 

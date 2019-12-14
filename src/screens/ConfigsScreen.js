@@ -54,18 +54,28 @@ const ConfigsScreen = ({navigation}) => {
         <Header title="Config" />
         <View style={styles.containerView}>
           <Panel title="Counters">
-            <ButtonDefault onPress={addCounter} text={'Add\nCounter'} />
-            <ButtonDefault onPress={removeCounter} text={'Remove\nCounter'} />
+            <ButtonDefault
+              onPress={addCounter}
+              text={'Add\nCounter'}
+              toast="Adding new counter"
+            />
+            <ButtonDefault
+              onPress={removeCounter}
+              text={'Remove\nCounter'}
+              toast="Removed selected counter"
+            />
           </Panel>
           <View style={styles.countersOperations}>
             <Panel title="Selected Counter">
               <ButtonDefault
                 onPress={increaseCounter}
                 text={'Increase\nCounter (++)'}
+                toast="Increased counter"
               />
               <ButtonDefault
                 onPress={decreaseCounter}
                 text={'Decrease\nCounter (--)'}
+                toast="Decreased counter"
               />
             </Panel>
             <View style={styles.countersOperations}>
@@ -73,6 +83,7 @@ const ConfigsScreen = ({navigation}) => {
                 onPress={resetCounter}
                 text={'Reset\nCounter'}
                 styleButton={styles.buttonReset}
+                toast="Reset"
               />
             </View>
           </View>
