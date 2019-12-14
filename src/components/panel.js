@@ -5,28 +5,26 @@ const Panel = props => {
   return (
     <View style={styles.countersOperations}>
       <Text style={styles.blockTitle}>{props.title}</Text>
-      <View style={styles.blockContainer} />
+      <View style={styles.blockContainer}>{props.children}</View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#fff',
-    borderRadius: 3,
-    padding: 20,
-    shadowColor: 'rgba(0,0,0,.7)',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    elevation: 1,
+  countersOperations: {
+    flex: 1,
   },
-  textButton: {
-    fontSize: 15,
-    color: '#14437b',
+  blockTitle: {
+    marginLeft: 30,
+    marginTop: 10,
+    fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center',
-    minWidth: 90,
+    color: '#000',
+  },
+  blockContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10,
   },
 });
 
