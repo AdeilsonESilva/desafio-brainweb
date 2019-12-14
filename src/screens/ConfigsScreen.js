@@ -1,6 +1,5 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, StatusBar, View, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch} from 'react-redux';
 import {
   INCREASE_COUNTER,
@@ -12,6 +11,8 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/header';
+import ButtonDefault from '../components/buttonDefault';
+import Panel from '../components/panel';
 
 const ConfigsScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -51,47 +52,35 @@ const ConfigsScreen = ({navigation}) => {
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.container}>
         <Header title="Config" />
+        <Panel title="ade123">
+          <Text style={{backgroundColor: 'red'}}>ade</Text>
+        </Panel>
         <View style={styles.containerView}>
           <View style={styles.countersOperations}>
             <Text style={styles.blockTitle}>Counters</Text>
             <View style={styles.blockContainer}>
-              <TouchableOpacity style={styles.button} onPress={addCounter}>
-                <Text
-                  style={styles.textButton}
-                  numberOfLines={2}
-                  ellipsizeMode="tail">
-                  {'Add\nCounter'}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={removeCounter}>
-                <Text style={styles.textButton}>{'Remove\nCounter'}</Text>
-              </TouchableOpacity>
+              <ButtonDefault onPress={addCounter} text={'Add\nCounter'} />
+              <ButtonDefault onPress={removeCounter} text={'Remove\nCounter'} />
             </View>
           </View>
           <View style={styles.countersOperations}>
+            <Text style={styles.blockTitle}>Selected Counter</Text>
             <View style={styles.countersOperations}>
-              <Text style={styles.blockTitle}>Selected Counter</Text>
               <View style={styles.blockContainer}>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={increaseCounter}>
-                  <Text style={styles.textButton}>
-                    {'Increase\nCounter\n(++)'}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={decreaseCounter}>
-                  <Text style={styles.textButton}>
-                    {'Decrease\nCounter\n(--)'}
-                  </Text>
-                </TouchableOpacity>
+                <ButtonDefault
+                  onPress={increaseCounter}
+                  text={'Increase\nCounter\n(++)'}
+                />
+                <ButtonDefault
+                  onPress={decreaseCounter}
+                  text={'Decrease\nCounter\n(--)'}
+                />
               </View>
-              <TouchableOpacity
-                style={[styles.button, styles.buttonReset]}
-                onPress={resetCounter}>
-                <Text style={styles.textButton}>{'Reset\nCounter'}</Text>
-              </TouchableOpacity>
+              <ButtonDefault
+                onPress={resetCounter}
+                text={'Reset\nCounter'}
+                styleButton={styles.buttonReset}
+              />
             </View>
           </View>
         </View>
@@ -117,46 +106,6 @@ const styles = StyleSheet.create({
     flex: 7,
     backgroundColor: '#3E86CB',
   },
-  item: {
-    margin: 15,
-    borderRadius: 6,
-    borderWidth: 4,
-    borderColor: '#26497E',
-    padding: 5,
-  },
-  itemSelected: {
-    backgroundColor: '#DBDBDB',
-  },
-  itemNotSelected: {
-    backgroundColor: '#6DADD1',
-  },
-  itemTitleSelected: {
-    color: '#9E9E9E',
-  },
-  itemTitleNotSelected: {
-    color: '#4E8EB2',
-  },
-  itemBodySelected: {
-    color: '#000',
-  },
-  itemBodyNotSelected: {
-    color: '#4E8EB2',
-  },
-  itemTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  itemBody: {
-    fontWeight: 'bold',
-    fontSize: 50,
-    alignSelf: 'flex-end',
-    marginTop: 30,
-    marginBottom: 10,
-    marginRight: 5,
-  },
-  title: {
-    fontSize: 20,
-  },
   countersOperations: {
     flex: 1,
   },
@@ -167,30 +116,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000',
   },
-  button: {
-    backgroundColor: '#fff',
-    borderRadius: 3,
-    padding: 20,
-    shadowColor: 'rgba(0,0,0,.7)',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  buttonReset: {
-    margin: 20,
-  },
-  textButton: {
-    fontSize: 15,
-    color: '#14437b',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    minWidth: 90,
-  },
   blockContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginVertical: 10,
+  },
+  buttonReset: {
+    marginHorizontal: 10,
   },
 });
 
